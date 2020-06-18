@@ -1,12 +1,24 @@
 package gobitonic
 
-func Sort(x []int, up bool) {
+func BitonicSort(x []int, up bool) bool {
+	if !isPowerOfTwo(len(x)) {
+		return false
+	}
+
 	if len(x) > 1 {
 		mid := len(x) / 2
-		Sort(x[:mid], true)
-		Sort(x[mid:], false)
+		BitonicSort(x[:mid], true)
+		BitonicSort(x[mid:], false)
 		SubSort(x, up)
 	}
+	return true
+}
+
+func isPowerOfTwo(num int) bool {
+	if num&(num-1) == 0 {
+		return true
+	}
+	return false
 }
 
 func SubSort(x []int, up bool) {
